@@ -4,8 +4,15 @@ import json
 random.seed()
 
 def draw_board(board):
-    for row in board:
-        print(row)
+            print(
+    '  -----------\n',
+    '|',board[0][0] ,'|', board[0][1], '|', board[0][2], '|\n'
+    '  -----------\n',
+    '|',board[1][0], '|', board[1][1], '|', board[1][2], '|\n',
+    ' -----------\n',
+    '|',board[2][0], '|', board[2][1], '|', board[2][2], '|\n',
+    ' -----------\n',
+    )
 
 def welcome(board):
     print("Welcome to the 'Unbeataible Noughts and Crossess' game .")
@@ -28,6 +35,8 @@ def initialise_board(board):
 def get_player_move(board):
     while True:
         try:
+            print('\t\t\t\t1 2 3')
+            print('\t\t\t\t4 5 6')
             move = int(input("Enter a input number between (1-9) :"))
             if move < 1 or move > 9:
                 raise ValueError("move should be greater than 1 and lesser than of 9")
