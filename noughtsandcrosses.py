@@ -139,6 +139,7 @@ def save_score(score):
                 data = json.load(f)
         except FileNotFoundError as e:
             raise e
+        
         if name in data:
             data[name]=score+data[name]
         else:
