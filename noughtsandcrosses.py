@@ -110,6 +110,10 @@ def play_game(board):
 
 def menu():
     while True:
+        print("1-Play the game")
+        print("2-Save your socre in the leaderboard")
+        print("Load and display the leaderboard")
+        print("q-quite the game")
         choice = input("Enter an input number between (1, 2, 3) or q: ")
         if choice in ['1', '2', '3', 'q']:
             return choice
