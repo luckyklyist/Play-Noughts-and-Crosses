@@ -123,26 +123,37 @@ def menu():
 def save_score(score):
     name = input("Enter your name: ")
     data = {}
-    try:
-        with open('leaderboard.txt', 'r') as f:
-            data = json.load(f)
-    except FileNotFoundError as e:
-        raise e
-    if name in data:
-        data[name]=score+data[name]
+    filename="leaderboard.txt"
+    if is_file(filename):
+        try:
+            with open('leaderboard.txt', 'r') as f:
+                data = json.load(f)
+        except FileNotFoundError as e:
+            raise e
+        if name in data:
+            data[name]=score+data[name]
+        else:
+            data[name] = score
+
+        with open('leaderboard.txt', 'w') as f:
+            json.dump(data, f)
+
+        print("Score saved to leaderboard!")
     else:
-        data[name] = score
+        print("Leaderboard not found")
 
-    with open('leaderboard.txt', 'w') as f:
-        json.dump(data, f)
-
-    print("Score saved to leaderboard!")
+def is_file(filename):
+    return os.path.exists(filename)
 
 def load_scores():
     try:
-        with open('leaderboard.txt', 'r') as f:
-            data = json.load(f)
-            return data
+        filename="leaderboard.txt"
+        if is_file(filename):
+            with open('leaderboard.txt', 'r') as f:
+                data = json.load(f)
+                return data
+        else:
+            print("Leaderboard not found")
     except Exception as e:
         print(f"An error occurred while loading the scores: {e}")
         raise e
@@ -150,4 +161,4 @@ def load_scores():
 
 def display_leaderboard(leaders):
     for name, score in leaders.items():
-        print(f"\n\n{name}: {score}\n\n")
+        print(f"{name}: {score}")
